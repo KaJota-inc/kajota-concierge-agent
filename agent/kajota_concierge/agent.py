@@ -142,7 +142,7 @@ fetch_mcp = McpToolset(
                 # `python-httpx` UA. Public web hosts are friendlier to
                 # named bots.
                 "--user-agent",
-                "KaJotaConciergeAgent/1.0 (hackathon; +https://github.com/KaJota-inc/kajota-coach)",
+                "KaJotaConciergeAgent/1.0 (hackathon; +https://github.com/KaJota-inc/kajota-concierge-agent)",
                 # Honour robots.txt — the agent shouldn't crawl past
                 # what humans can hit. Reasonable default; flip off for
                 # specific demos via env if needed.

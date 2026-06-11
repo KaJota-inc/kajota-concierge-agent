@@ -2,7 +2,8 @@
 
 **Track:** Google Cloud Rapid Agent Hackathon 2026
 **Deadline:** Jun 11, 2026, 2:00 PM PT
-**Branch:** [`hackathon/rapid-agent`](https://github.com/KaJota-inc/kajota-coach/tree/hackathon/rapid-agent)
+**Repo:** [`KaJota-inc/kajota-concierge-agent`](https://github.com/KaJota-inc/kajota-concierge-agent) (public, MIT)
+**Deployed agent:** <https://kajota-concierge-agent.onrender.com>
 
 Paste the bracketed fields into Devpost's submission form. The structured sections (`## Inspiration`, etc.) map 1-to-1 to Devpost's prompts.
 
@@ -46,7 +47,7 @@ A conversational concierge that lives inside the existing KaJota mobile app:
 └───────────────────────────┬────────────────────────────────┘
                             │ HTTPS
 ┌───────────────────────────▼────────────────────────────────┐
-│  Render Web Service (Docker, kajota-coach repo)            │
+│  Render Web Service (Docker, kajota-concierge-agent repo)  │
 │    FastAPI: kajota_concierge.server                        │
 │      ↓                                                     │
 │    ADK Runner ──▶ root_agent (Gemini 2.5 Pro on Vertex AI) │
@@ -74,7 +75,7 @@ The mobile UI renders proactive output identically to a normal agent reply: text
 
 ### Repos + commits
 
-- **Agent + mobile** (this repo): https://github.com/KaJota-inc/kajota-coach/tree/hackathon/rapid-agent — `agent/` (Python ADK + two MCP toolsets), `src/` (Expo)
+- **Agent + mobile** (this repo): https://github.com/KaJota-inc/kajota-concierge-agent — `agent/` (Python ADK + two MCP toolsets), `src/` (Expo)
 
 ## Challenges we ran into
 
@@ -125,27 +126,29 @@ We persist these in both `.env.rapid-agent` (local dev) and the Render env group
 ## Try it yourself
 
 ```sh
-# 1. Clone + check out the branch
-git clone https://github.com/KaJota-inc/kajota-coach
-cd kajota-coach
-git checkout hackathon/rapid-agent
+# 1. Clone
+git clone https://github.com/KaJota-inc/kajota-concierge-agent
+cd kajota-concierge-agent
 
 # 2. Agent (Python ADK + two MCP toolsets)
 cd agent
-cp ../.env.rapid-agent.example ../.env.rapid-agent
-# Fill: GCP_PROJECT_ID, MONGODB_URI, MONGODB_DATABASE
-# Drop secrets/rapid-agent/gcp-service-account.json (per HACKS.md gcloud commands)
-pip install -e .
-pip install mcp-server-fetch   # second MCP partner
+python -m venv .venv && source .venv/bin/activate
+pip install -e .            # pulls mcp-server-fetch as a transitive dep
+
+# Set env: GCP_PROJECT_ID, MONGODB_URI, GEMINI_MODEL, GCP service-account JSON path
+# See agent/README.md for the full env block.
+
+python kajota_concierge/seed.py     # one-shot demo seed
 python -m kajota_concierge.server
-# → http://localhost:8080/chat  (reactive)
-# → http://localhost:8080/proactive  (agentic, called on screen mount)
+# → http://localhost:8080/chat       (reactive)
+# → http://localhost:8080/proactive  (agentic — called on screen mount)
 
 # 3. Mobile (Expo)
 cd ..
-npm install
-npx expo start
-# point CONCIERGE_AGENT_BASE at your agent URL
+npm install                  # postinstall applies patches/expo-dev-menu+5.0.23.patch
+npx expo run:android         # or  npx expo run:ios
+# `app.json -> extra.conciergeAgentBaseUrl` points at the deployed agent
+# by default; override to point at your local backend.
 ```
 
 ## Built with
@@ -158,4 +161,4 @@ npx expo start
 
 ## Public repo URL
 
-https://github.com/KaJota-inc/kajota-coach/tree/hackathon/rapid-agent
+https://github.com/KaJota-inc/kajota-concierge-agent

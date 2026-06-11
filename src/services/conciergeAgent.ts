@@ -10,7 +10,7 @@
  *   Default base URL: https://kajota-concierge-agent.onrender.com
  *   Override via app.json → `extra.conciergeAgentBaseUrl`
  *
- * Backend: kajota-coach/agent/kajota_concierge/server.py
+ * Backend: agent/kajota_concierge/server.py (in this repo)
  */
 import Constants from 'expo-constants';
 
