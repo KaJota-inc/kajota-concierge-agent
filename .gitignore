@@ -1,0 +1,44 @@
+node_modules/
+.expo/
+dist/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# Native build outputs (regenerated via `expo prebuild`)
+ios/
+android/
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Local env
+.env
+.env.local
+.env.*.local
+
+# Per-hack env files: `.env.<hack>` stays local, `.env.<hack>.example`
+# is committed as the template (see HACKS.md).
+.env.*
+!.env.example
+!.env.*.example
+
+# Per-hack secret storage: directories are tracked via `.gitkeep` but
+# their contents (GCP SA JSON, deployer keys, etc.) stay local.
+# Pattern uses `*/*` (not `**/*`) so the parent dir isn't itself
+# excluded — git can't re-include a file under an excluded parent.
+secrets/*/*
+!secrets/*/.gitkeep
+
+# Logs
+*.log

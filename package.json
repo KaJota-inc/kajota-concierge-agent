@@ -1,0 +1,50 @@
+{
+  "name": "kajota-concierge-agent",
+  "version": "0.1.0",
+  "description": "KaJota Concierge — shopping agent built on Gemini + Google Cloud ADK + MongoDB MCP + Fetch MCP. Google Cloud Rapid Agent Hackathon 2026 submission.",
+  "main": "node_modules/expo/AppEntry.js",
+  "private": false,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KaJota-inc/kajota-concierge-agent"
+  },
+  "keywords": [
+    "expo",
+    "react-native",
+    "gemini",
+    "google-cloud-adk",
+    "mcp",
+    "mongodb",
+    "agent",
+    "hackathon"
+  ],
+  "scripts": {
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "typecheck": "tsc --noEmit",
+    "postinstall": "patch-package"
+  },
+  "dependencies": {
+    "@expo/vector-icons": "^14.0.2",
+    "@react-navigation/native": "^6.1.17",
+    "@react-navigation/native-stack": "^6.9.26",
+    "expo": "~51.0.28",
+    "expo-constants": "~16.0.2",
+    "expo-dev-client": "~4.0.29",
+    "expo-status-bar": "~1.12.1",
+    "react": "18.2.0",
+    "react-native": "0.74.5",
+    "react-native-gesture-handler": "~2.16.1",
+    "react-native-safe-area-context": "4.10.5",
+    "react-native-screens": "3.31.1",
+    "react-native-svg": "15.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@types/react": "~18.2.45",
+    "patch-package": "^8.0.1",
+    "typescript": "~5.3.3"
+  }
+}

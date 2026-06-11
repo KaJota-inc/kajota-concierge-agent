@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "KaJota Concierge",
+    "slug": "kajota-concierge-agent",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#F15A32"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "io.kajota.concierge"
+    },
+    "android": {
+      "package": "io.kajota.concierge",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#F15A32"
+      }
+    },
+    "scheme": "kajota-concierge",
+    "extra": {
+      "conciergeAgentBaseUrl": "https://kajota-concierge-agent.onrender.com"
+    }
+  }
+}
