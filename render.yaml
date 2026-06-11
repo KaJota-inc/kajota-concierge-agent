@@ -1,15 +1,14 @@
 # Render service config for the KaJota Concierge agent.
 #
-# One-click deploy from this branch (hackathon/rapid-agent):
+# One-click deploy:
 #   1. Connect this repo to your Render account
-#   2. Point at this render.yaml
-#   3. Set branch = hackathon/rapid-agent
-#   4. Provision the secrets below via the Render dashboard
-#      (sync: false fields below — Render won't accept JSON in
-#      env vars, so use Secret Files for the GCP credential)
+#   2. Point at this render.yaml (Render auto-detects on the main branch)
+#   3. Provision the secrets below via the Render dashboard
+#      (sync: false fields below — Render won't accept JSON in env
+#      vars, so use the Secret Files feature for the GCP credential)
 #
-# After the first successful boot, the service URL becomes the
-# COACH_AGENT_BASE the mobile coach hits.
+# The deployment URL becomes `conciergeAgentBaseUrl` in app.json that
+# the mobile client hits at `POST /chat` and `POST /proactive`.
 
 services:
   - type: web
@@ -17,7 +16,7 @@ services:
     runtime: docker
     rootDir: agent
     plan: free
-    branch: hackathon/rapid-agent
+    branch: main
     region: oregon
 
     dockerfilePath: agent/Dockerfile
@@ -57,12 +56,11 @@ services:
       - key: GOOGLE_CLOUD_LOCATION
         value: global
 
-      # ---- MongoDB (the partner MCP integration) ------------------
-      - key: PARTNER
-        value: mongodb
+      # ---- Partner 1: MongoDB Atlas (live merchant data) ----------
       - key: MONGODB_URI
         sync: false   # Render dashboard input (MongoDB Atlas SRV URI)
 
-      # ---- Optional ----------------------------------------------
-      - key: COACH_BACKEND_URL
-        sync: false   # The kajota-mobile-backend Render URL, if used
+      # ---- Partner 2: Fetch MCP (public web) ----------------------
+      # No env vars required — mcp-server-fetch is launched as a Python
+      # module by the agent at boot and needs no auth. Listed here for
+      # completeness so anyone reading this spec sees both partners.
